@@ -6,10 +6,13 @@ import org.springframework.stereotype.Repository;
 import cl.triskeledu.catalogo.model.Libro;
 import java.util.Optional;
 
+import java.util.List;
+
 @Repository
 public interface LibroRepository extends JpaRepository<Libro, Long> {
     
     Optional<Libro> findByIsbn(String isbn);
 
     boolean existsByIsbn(String isbn);
+    List<Libro> findByAutorContainingIgnoreCase(String autor);
 }

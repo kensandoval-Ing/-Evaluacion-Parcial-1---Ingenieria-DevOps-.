@@ -103,6 +103,7 @@ public class LibroController {
 
         return ResponseEntity.ok(collection);
     }
+    @Operation(summary = "Buscar libros por autor", description = "Retorna los libros cuyo autor coincide (parcial, sin distinguir mayusculas)") @GetMapping("/autor/{autor}") public ResponseEntity<List<LibroResponse>> findByAutor( @Parameter(description = "Nombre o parte del nombre del autor", required = true, example = "Garcia") @PathVariable String autor) { return ResponseEntity.ok(libroService.findByAutor(autor)); }
 
     @Operation(summary = "Obtener libro por ID", description = "Retorna un libro según su identificador único")
     @ApiResponses({
@@ -129,6 +130,14 @@ public class LibroController {
             @PathVariable String isbn) {
         // findByIsbn también devuelve un libro único: merece sus links de navegación
         return ResponseEntity.ok(addLinks(libroService.findByIsbn(isbn)));
+    }
+    
+    @Operation(summary = "Buscar libros por autor", description = "Retorna los libros cuyo autor coincide (parcial, sin distinguir mayusculas)")
+    @GetMapping("/autor/{autor}")
+    public ResponseEntity<List<LibroResponse>> findByAutor(
+            @Parameter(description = "Nombre o parte del nombre del autor", required = true, example = "Garcia")
+            @PathVariable String autor) {
+        return ResponseEntity.ok(libroService.findByAutor(autor));
     }
 
     @Operation(summary = "Crear un nuevo libro", description = "Registra un nuevo libro en el catálogo")

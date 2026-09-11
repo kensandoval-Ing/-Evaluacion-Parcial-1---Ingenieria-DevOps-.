@@ -44,17 +44,20 @@ public class LibroService {
         return libroMapper.toResponse(getLibroById(id));
     }
 
-    public LibroResponse findByIsbn(String isbn) {
+    public LibroResponse findByIsbn(String isbn) { 
         return libroMapper.toResponse(getLibroByIsbn(isbn));
     }
 
+    public List<LibroResponse> findByAutor(String autor) {
+    return libroMapper.toResponseList(libroRepository.findByAutorContainingIgnoreCase(autor));
+}
     @Transactional
     public LibroResponse create(LibroRequest request) {
         validateIsbnUnico(request.getIsbn());
         Libro libro = new Libro();  
         libroMapper.updateEntity(request, libro);
         libroRepository.save(libro);
-        sincronizarProyeccion(libro);
+        sincronizarProyeccion(libro); 
         return libroMapper.toResponse(libro);
     }
 
