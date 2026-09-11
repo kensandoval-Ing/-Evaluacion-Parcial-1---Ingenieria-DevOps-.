@@ -21,4 +21,4 @@ jobs:
           cache: maven
 
       - name: Compilar y ejecutar tests unitarios (excluye tests que requieren BD real)
-        run: mvn -B clean package "-Dtest=!*ApplicationTests"
+        run: mvn -B clean package "-Dtest=!*ApplicationTests" -Dsurefire.failIfNoSpecifiedTests=false
