@@ -103,6 +103,7 @@ public class LibroController {
 
         return ResponseEntity.ok(collection);
     }
+    @Operation(summary = "Buscar libros por autor", description = "Retorna los libros cuyo autor coincide (parcial, sin distinguir mayusculas)") @GetMapping("/autor/{autor}") public ResponseEntity<List<LibroResponse>> findByAutor( @Parameter(description = "Nombre o parte del nombre del autor", required = true, example = "Garcia") @PathVariable String autor) { return ResponseEntity.ok(libroService.findByAutor(autor)); }
 
     @Operation(summary = "Obtener libro por ID", description = "Retorna un libro según su identificador único")
     @ApiResponses({

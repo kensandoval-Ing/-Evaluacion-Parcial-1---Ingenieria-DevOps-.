@@ -44,7 +44,8 @@ public class LibroService {
         return libroMapper.toResponse(getLibroById(id));
     }
 
-    public LibroResponse findByIsbn(String isbn) {
+    public LibroResponse findByIsbn(String isbn) { 
+        public List<LibroResponse> findByAutor(String autor) { return libroMapper.toResponseList(libroRepository.findByAutorContainingIgnoreCase(autor)); }
         return libroMapper.toResponse(getLibroByIsbn(isbn));
     }
 
